@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  appforjenkins:
+    image: ${DOCKER_REGISTRY-}appforjenkins
+    restart: on-failure
+    ports:
+      - "5194:5194"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - jenkins-network
