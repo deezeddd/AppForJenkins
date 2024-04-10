@@ -2,8 +2,15 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV ASPNETCORE_URLS=http://+:5194
+
+# Expose ports
 EXPOSE 80
 EXPOSE 5194
+
+# Create directories for volumes
+RUN mkdir -p /root/.microsoft/usersecrets /root/.aspnet/https
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
@@ -19,7 +26,6 @@ RUN dotnet publish "AppForJenkins.csproj" -c Release -o /app/publish /p:UseAppHo
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENV ASPNETCORE_URLS=http://+:5194
 
 
 ENTRYPOINT ["dotnet", "AppForJenkins.dll"]
