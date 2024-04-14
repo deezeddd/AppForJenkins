@@ -14,7 +14,7 @@ RUN mkdir -p /root/.microsoft/usersecrets /root/.aspnet/https
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["./AppForJenkins.csproj", "."]
+COPY ["AppForJenkins/AppForJenkins.csproj", "."]
 RUN dotnet restore "./AppForJenkins.csproj"
 COPY . .
 WORKDIR "/src/."
