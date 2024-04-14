@@ -57,9 +57,6 @@ pipeline {
 
         stage('Container Run') {
             steps {
-                // Start containers using Docker Compose
-            // sh 'docker ps'
-
                 sh "sudo docker run -p 5194:5194 $IMAGE_NAME:$IMAGE_TAG"
             }
         }
