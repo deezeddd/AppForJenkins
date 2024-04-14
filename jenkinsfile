@@ -50,7 +50,6 @@ pipeline {
                 script{
                     docker.withRegistry('https://index.docker.io/v1/','docker_login'){
                         docker.image("${IMAGE_NAME}:${IMAGE_TAG}").push()
-                        sh 'sudo docker image $IMAGE_NAME:$IMAGE_TAG push'
                 }
             }
         }
@@ -60,7 +59,7 @@ pipeline {
             steps {
                 // Start containers using Docker Compose
             // sh 'docker ps'
-                sh "sudo docker rmi $IMAGE_NAME:$IMAGE_TAG"
+                sh "sudo docker rm $IMAGE_NAME"
                 sh "sudo docker run -p 5194:5194 $IMAGE_NAME:$IMAGE_TAG"
             }
         }
