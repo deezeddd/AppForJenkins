@@ -5,7 +5,7 @@ pipeline {
   environment {
         IMAGE_NAME = 'vedantmaurya/appjenkins'
         IMAGE_TAG = 'latest'
-        DOCKERFILE_PATH = 'AppForJenkins/Dockerfile'
+        DOCKERFILE_PATH = './AppForJenkins/Dockerfile'
     }
 
 
