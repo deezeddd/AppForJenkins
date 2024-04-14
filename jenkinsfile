@@ -8,8 +8,6 @@ pipeline {
         DOCKERFILE_PATH = './AppForJenkins/Dockerfile'
     }
 
-
-
     stages {
         stage('Checkout'){
             steps{
@@ -39,9 +37,6 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                // Build Docker images if needed
-            // sh 'ls AppForJenkins/'
-
             sh "sudo docker build -t $IMAGE_NAME:$IMAGE_TAG -f $DOCKERFILE_PATH ."
             }
         }
