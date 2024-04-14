@@ -3,7 +3,7 @@ pipeline {
     agent any
     
   environment {
-        IMAGE_NAME = 'appjenkins'
+        IMAGE_NAME = 'vedantmaurya/appjenkins'
         IMAGE_TAG = 'latest'
         DOCKERFILE_PATH = './AppForJenkins/Dockerfile'
     }
@@ -60,6 +60,7 @@ pipeline {
             steps {
                 // Start containers using Docker Compose
             // sh 'docker ps'
+                sh "sudo docker rmi $IMAGE_NAME:$IMAGE_TAG"
                 sh "sudo docker run -p 5194:5194 $IMAGE_NAME:$IMAGE_TAG"
             }
         }
