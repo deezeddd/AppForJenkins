@@ -14,14 +14,14 @@ RUN mkdir -p /root/.microsoft/usersecrets /root/.aspnet/https
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["AppForJenkins.csproj", "."]
+COPY ["/AppForJenkins/AppForJenkins.csproj", "."]
 RUN dotnet restore "./AppForJenkins.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "AppForJenkins.csproj" -c Release -o /app/build
+RUN dotnet build "/AppForJenkins/AppForJenkins.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "AppForJenkins.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "/AppForJenkins/AppForJenkins.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
