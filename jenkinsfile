@@ -52,7 +52,9 @@ pipeline {
 
         stage('Container Run') {
             steps {
-                sh "sudo docker run -p 5194:5194 $IMAGE_NAME:$IMAGE_TAG"
+                sh "docker rm -f appjenkins || true"
+                
+                sh "sudo docker run --name appjenkins -p 5194:5194 $IMAGE_NAME:$IMAGE_TAG"
             }
         }
 
